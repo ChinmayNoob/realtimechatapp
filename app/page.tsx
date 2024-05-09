@@ -3,6 +3,7 @@ import ChatHeader from "@/components/ChatHeader";
 import { supabaseServer } from "@/lib/supabase/server";
 import InitUser from "@/lib/store/initUser";
 import { Input } from "@/components/ui/input";
+import ChatInput from "@/components/ChatInput";
 export default async function Page() {
 	const supabase = await supabaseServer();
 	const { data } = await supabase.auth.getSession();
@@ -41,9 +42,7 @@ export default async function Page() {
 						</div>
 
 					</div>
-					<div className="p-5">
-						<Input placeholder="send message " />
-					</div>
+					<ChatInput />
 				</div>
 			</div>
 			<InitUser user={data.session?.user} />
