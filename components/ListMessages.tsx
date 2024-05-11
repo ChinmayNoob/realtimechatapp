@@ -2,6 +2,7 @@
 import { useMessage } from '@/lib/store/message'
 import React from 'react'
 import Message from './Message'
+import { DeleteAlert } from './MessageActions'
 
 export default function ListMessages() {
     const messages = useMessage((state) =>state.messages)
@@ -16,6 +17,7 @@ export default function ListMessages() {
             )
         })}
     </div>
+    <DeleteAlert />
 
 </div>
   )
