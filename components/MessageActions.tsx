@@ -56,7 +56,7 @@ import { useRef } from "react";
     return (
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button id="trigger-delete" className="bg-transparent hover:bg-transparent"></Button>
+          <button id="trigger-delete"></button>
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>

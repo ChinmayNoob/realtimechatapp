@@ -1,14 +1,18 @@
 "use client"
 import { Imessage, useMessage } from '@/lib/store/message'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Message from './Message'
 import { DeleteAlert, EditAlert } from './MessageActions'
 import { supabaseBrowser } from '@/lib/supabase/browser'
 import { toast } from 'sonner'
+import { ArrowDown } from 'lucide-react'
 
 export default function ListMessages() {
 
-  const scrollRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const scrollRef = useRef() as React.
+  MutableRefObject<HTMLDivElement>;
+
+  const [userScrolled,setUserScolled] =useState(false);
 
   const { messages, addMessage, optimisticIds, optimisticDeleteMessage , optimisticUpdateMessage } = useMessage((state) => state)
 
@@ -60,10 +64,18 @@ export default function ListMessages() {
     }
   }, [messages]);
 
+  const handleOnScroll =() =>{
+    const scrollContainer = scrollRef.current;
+    if(scrollContainer){
+      const isScroll =scrollContainer.scrollTop < scrollContainer.scrollHeight - scrollContainer.clientHeight - 10;
+      setUserScolled(isScroll);
+    }
+  }
+
 
 
   return (
-    <div className="flex-1 flex flex-col p-5 h-full overflow-y-auto" ref={scrollRef}>
+    <div className="flex-1 flex flex-col p-5 h-full overflow-y-auto" ref={scrollRef} onScroll={handleOnScroll}>
       <div className="flex-1"></div>
       <div className="space-y-7">
         {messages.map((value, index) => {
@@ -72,6 +84,19 @@ export default function ListMessages() {
           )
         })}
       </div>
+
+      {userScrolled && <div className='absolute bottom-20 right-1/2'>
+        <div className='w-10 h-10 bg-sky-500 rounded-full flex justify-center items-center mx-auto border cursor-pointer hover:scale-110 transition-all' onClick={()=>{
+  scrollRef.current.scrollTo({
+    top: scrollRef.current.scrollHeight,
+    behavior: 'smooth' // Smooth scrolling behavior
+  });
+
+        }}>
+          <ArrowDown />
+        </div>
+      </div>
+      }
       <DeleteAlert />
       <EditAlert />
 
