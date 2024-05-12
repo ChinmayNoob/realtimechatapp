@@ -1,11 +1,15 @@
 "use client"
 import { useMessage } from '@/lib/store/message'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Message from './Message'
 import { DeleteAlert, EditAlert } from './MessageActions'
 
 export default function ListMessages() {
     const messages = useMessage((state) =>state.messages)
+
+    useEffect(()=>{
+
+    },[])
 
   return (
     <div className="flex-1 flex flex-col p-5 h-full overflow-y-auto">
