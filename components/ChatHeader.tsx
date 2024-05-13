@@ -4,7 +4,7 @@ import { Button } from './ui/button'
 import { supabaseBrowser } from '@/lib/supabase/browser'
 import { User } from '@supabase/supabase-js'
 import { useRouter } from 'next/navigation'
-import ChaPresence from './ChaPresence'
+import ChaPresence from './ChatPresence'
 
 function ChatHeader({user}:{user : User | undefined}) {
     const router = useRouter();
