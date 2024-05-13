@@ -4,6 +4,7 @@ import { Button } from './ui/button'
 import { supabaseBrowser } from '@/lib/supabase/browser'
 import { User } from '@supabase/supabase-js'
 import { useRouter } from 'next/navigation'
+import ChaPresence from './ChaPresence'
 
 function ChatHeader({user}:{user : User | undefined}) {
     const router = useRouter();
@@ -32,10 +33,8 @@ function ChatHeader({user}:{user : User | undefined}) {
                     <h1 className='text-xl font-bold'>
                         Live Chat
                     </h1>
-                    <div className='flex items-center gap-x-1'>
-                        <div className='h-4 w-4 bg-green-500 rounded-full animate-pulse'></div>
-                        <h2 className='text-sm text-gray-300'>3 online</h2>
-                    </div>
+                    <ChaPresence/>
+
                 </div>
 				{user ? (
 					<Button onClick={handleLogout}>Logout</Button>
